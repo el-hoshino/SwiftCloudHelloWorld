@@ -13,7 +13,7 @@ public struct SwiftCloudHelloWorld {
                 .status(.ok)
                 .send("Hello, Swift Cloud!")
         }
-        .post("/json_test") { req, res in
+        .get("/json_test") { req, res in
             let body = try await req.body.jsonObject()
             try await res
                 .status(.ok)
