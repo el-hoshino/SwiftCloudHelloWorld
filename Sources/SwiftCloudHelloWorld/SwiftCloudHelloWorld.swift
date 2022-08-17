@@ -4,13 +4,6 @@ import Compute
 public struct SwiftCloudHelloWorld {
     
     public static func main() async throws {
-        try await onIncomingRequest(handler)
-    }
-    
-    static func handler(
-        req: IncomingRequest,
-        res: OutgoingResponse
-    ) async throws {
         try await onIncomingRequest(router.run)
     }
     
