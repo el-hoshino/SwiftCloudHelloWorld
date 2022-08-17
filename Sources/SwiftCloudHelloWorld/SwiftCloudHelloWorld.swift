@@ -14,7 +14,7 @@ public struct SwiftCloudHelloWorld {
                 .send("Hello, Swift Cloud!")
         }
         .post("/json_test") { req, res in
-            let body = try await req.body.decode(String.self)
+            let body = try await req.body.jsonObject()
             try await res
                 .status(.ok)
                 .send(body)
