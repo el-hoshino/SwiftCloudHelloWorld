@@ -4,16 +4,20 @@ import Compute
 public struct SwiftCloudHelloWorld {
     
     public static func main() async throws {
-        try await onIncomingRequest(handler)
+        try await onIncomingRequest(router.run)
     }
     
-    static func handler(
-        req: IncomingRequest,
-        res: OutgoingResponse
-    ) async throws {
-        try await res
-            .status(.ok)
-            .send("Hello, Swift Cloud!")
-    }
+    static let router = Router()
+        .get("") { req, res in
+            try await res
+                .status(.ok)
+                .send("Hello, Swift Cloud!")
+        }
+        .get("/json_test") { req, res in
+            let body = try await req.body.jsonObject()
+            try await res
+                .status(.ok)
+                .send(body)
+        }
     
 }
