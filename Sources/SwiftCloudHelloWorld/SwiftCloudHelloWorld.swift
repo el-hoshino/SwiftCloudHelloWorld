@@ -14,7 +14,7 @@ public struct SwiftCloudHelloWorld {
                 .status(.ok)
                 .send("Hello, World!")
         }
-        .get("/json_test") { req, res in
+        .get("/greeting") { req, res in
             let jsonBody = try await req.body.jsonObject()
             let name = jsonBody["name"] as? String ?? ""
             let result = "Hello, \(name)!"
