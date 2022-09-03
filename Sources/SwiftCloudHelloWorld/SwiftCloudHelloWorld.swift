@@ -12,9 +12,13 @@ public struct SwiftCloudHelloWorld {
             let jsonBody = try await req.body.jsonObject()
             let name = jsonBody["name"] as? String ?? ""
             let result = "Hello, \(name)!"
+            let resultJSON = [
+                "greeting": result,
+            ]
+            let resultData = try JSONEncoder().encode(resultJSON)
             try await res
                 .status(.ok)
-                .send(result)
+                .send(resultData)
         }
         .get("/json_test") { req, res in
             let body = try await req.body.jsonObject()
