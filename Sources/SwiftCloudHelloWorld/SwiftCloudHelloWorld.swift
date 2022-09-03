@@ -9,9 +9,12 @@ public struct SwiftCloudHelloWorld {
     
     static let router = Router()
         .get("") { req, res in
+            let jsonBody = try await req.body.jsonObject()
+            let name = jsonBody["name"] as? String ?? ""
+            let result = "Hello, \(name)!"
             try await res
                 .status(.ok)
-                .send("Hello, Swift Cloud!")
+                .send(result)
         }
         .get("/json_test") { req, res in
             let body = try await req.body.jsonObject()
